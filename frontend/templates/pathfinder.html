@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+{% block contentvar %}
+<head style="touch-action: none;">
+    <meta charset="UTF-8">
+    <title>A* path finding</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/libraries/p5.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='js/sketch.js') }}"></script>
+</head>
+
+    <div class="body">
+        <div class="container-fluid" id="header">
+            <div class="row jumbotron">
+                <div class="col">
+                    <h1>A Star Visualizer</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- About/How to buttons -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <ul class="nav">
+                        <li><div id="about-button" class="btn btn-block" style="background: var(--myGray-color);" type="button" data-toggle="tab"
+                                 data-target="#about-content">
+                            <h2 style="color: var(--myYellow-color);">About</h2>
+                        </div>
+                        </li>
+                        <li> <div class="btn btn-block" style="background: var(--myGray-color);" type="button" data-toggle="tab"
+                                  data-target="#quick-content">
+                            <h2 style="color: var(--myYellow-color);">Quickstart</h2>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Expanded text with buttons -->
+            <div style="color: var(--myGreen-color);">
+                <div class="row">
+                    <div class="col">
+                        <div class="tab-content">
+                            <div id="about-content" style="color: var(--myGreen-color);" class="collapse active">
+                                <p> This is a search algorithm that uses both the distance and the cost of each node to determine the
+                                    quickest route.</p>
+                                <p>If all the nodes are the same then it will find the shortest route</p>
+                                <p>Click on Quickstart to jump in</p>
+                                <br>
+                                <p>Press 'Reset Board' to start a fresh canvas. You traverse road the fastest and dirt the slowest</p>
+                                <p>Generate obstacles or generate a dirt canvas and make connecting roads</p>
+                                <p>Resize the canvas to add more nodes, watch the size though as more nodes means more searching paths</p>
+                                <p>Added feature: If you move the end node while the search is in progress, watch as it draws</p>
+                            </div>
+                            <div id="quick-content" style="color: orangered" class="collapse">
+                                <p>Click on 'Begin' and set a starting point on the canvas.</p>
+                                <p>Click on 'End' and set an ending point on the canvas.</p>
+                                <p> Press 'Start Search' once ready or click on the other options</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- button layout -->
+        <div class="selection-options" style="background: var(--myGray-color);">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col"><h4 class="text-center">Settings</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="btn btn-outline-secondary btn-block" type="button" data-toggle="collapse"
+                             data-target="#canvas-collapsed">
+                            <h2 style="color: black">Canvas</h2>
+                        </div>
+                        <div id="canvas-collapsed" class="collapse show">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="changeGridSize()" type="button" class="btn btn-dark btn-block">Canvas Size</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="generateDirt()" type="button" class="btn btn-dark btn-block">Dirt Canvas</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="resetBoard()" type="button" class="btn btn-dark btn-block">Reset Board</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="btn btn-outline-secondary btn-block" type="button" data-toggle="collapse"
+                             data-target="#set-collapsed">
+                            <h2 style="color: black">Set</h2>
+                        </div>
+                        <div id="set-collapsed" class="collapse show">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="changeToStart()" type="button" class="btn btn-success btn-block">Begin</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl">
+                                            <button onclick="changeToEnd()" type="button" class="btn btn-danger btn-block">End</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="changeToObstacle()" type="button" class="btn btn-dark btn-block">Obstacle</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="btn btn-outline-secondary btn-block" type="button" data-toggle="collapse"
+                             data-target="#terrain-collapsed">
+                            <h2 style="color: black">Terrain</h2>
+                        </div>
+                        <div id="terrain-collapsed" class="collapse show">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="changeToLow()" type="button" class="btn btn-dark btn-block">Road</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl">
+                                            <button onclick="changeToMid()" type="button" class="btn btn-dark btn-block">Old</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="changeToHigh()" type="button" class="btn btn-dark btn-block">Dirt</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="btn btn-outline-secondary btn-block" type="button" data-toggle="collapse"
+                             data-target="#options-collapsed">
+                            <h2 style="color: black">Options</h2>
+                        </div>
+                        <div id="options-collapsed" class="collapse show">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="loop()" type="button" class="btn btn-success btn-block">Start search</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="noLoop()" type="button" class="btn btn-danger btn-block">Stop search</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button onclick="generateBlocked()" type="button" class="btn btn-dark btn-block">Generate Obstacles</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- canvas to be modified by javascript -->
+        <div class="container-fluid">
+            <div class="row">
+                <div id="canvasid" class="col"></div>
+            </div>
+        </div>
+
+    </div>
+{% endblock contentvar %}

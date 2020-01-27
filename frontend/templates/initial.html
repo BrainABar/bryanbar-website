@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block contentvar %}
+    <div class="body">
+        <!--- Jumbotron --->
+        <div class="container-fluid">
+            <div class="row jumbotron">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+                    <p class="lead">WeDeal</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+                    <a href="#"><button type="button" class="btn btn-outline-secondary">Button</button> </a>
+                </div>
+            </div>
+        </div>
+
+                <!--- Image Slider--->
+        <div class="container-fluid">
+            <div class="row">
+                <div id="slides" class="carousel slide" data-ride="carousel">
+                    <ul class="carousel-indicators">
+                        <li data-target="#slides" data-slide-to="0" class="active"></li>
+                        <li data-target="#slides" data-slide-to="1"></li>
+                        <li data-target="#slides" data-slide-to="2"></li>
+                    </ul>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ url_for('static', filename='img/stock10.jpg') }}" alt="Stock image">
+                            <div class="carousel-caption">
+                                <h1 class="display-2">Bootstrap</h1>
+                                <h3>Complete</h3>
+                                <button type="button" class="btn btn-outline-light btn-lg">Button</button>
+                                <button type="button" class="btn btn-primary btn-lg">Button2</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='img/stock11.jpg') }}" alt="Stock2 image">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ url_for('static', filename='img/stock12.jpg') }}" alt="Stock3 image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Section: Features v.1 -->
+        <div class="container-fluid">
+        <section class="text-center my-5">
+
+            <!-- Section heading -->
+            <h2 class="h1-responsive font-weight-bold my-5">Why is it so great?</h2>
+            <!-- Section description -->
+            <p class="lead grey-text w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4">
+
+                    <i class="fas fa-chart-area fa-3x red-text"></i>
+                    <h5 class="font-weight-bold my-4">Analytics</h5>
+                    <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores aperiam minima assumenda deleniti hic.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4">
+
+                    <i class="fas fa-book fa-3x cyan-text"></i>
+                    <h5 class="font-weight-bold my-4">Tutorials</h5>
+                    <p class="grey-text mb-md-0 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores aperiam minima assumenda deleniti hic.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4">
+
+                    <i class="far fa-comments fa-3x orange-text"></i>
+                    <h5 class="font-weight-bold my-4">Support</h5>
+                    <p class="grey-text mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores
+                        aperiam minima assumenda deleniti hic.
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </section>
+        <!-- Section: Features v.1 -->
+        </div>
+
+    </div>
+{% endblock contentvar %}
