@@ -23,7 +23,7 @@
 
 </head>
 
-<body style="background: gray">
+<body style="background: whitesmoke">
 {% block contentvar %}
 {% endblock contentvar%}
 
@@ -32,11 +32,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
+                <!-- Navbar -->
                 <nav class="navbar navbar-expand-md">
+                    <!-- Navbar Menu -->
                     <a class="navbar-brand" href="{{ url_for('index') }}">BryanBar</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" style="background: green" data-target="#menuNav">
                         <span><i class="las la-chevron-up"></i></span>
                     </button>
+                    <!-- Navbar Menu Contents -->
                     <div class="collapse navbar-collapse" id="menuNav">
                         <ul class="navbar-nav">
                             <li class="nav-item mx-auto">

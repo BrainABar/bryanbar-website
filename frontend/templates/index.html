@@ -1,18 +1,28 @@
 {% extends 'layout.html' %}
 {% block headvar %}
+    <!-- p5 library and sketch that will fit background -->
     <script defer src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
+    <script defer src="{{ url_for('static', filename='js/dotObject.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/sketch.js') }}"></script>
 {% endblock headvar %}
 {% block contentvar %}
-    <div class="jumbotron" style="background: black">
-        header content
+    <!-- Header content at the top -->
+    <div class="container-fluid center">
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <p style="color: #BFDDE0">Text</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Body content -->
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="body" style="background: #11557C">
-                    test
+                <div class="body">
+                    <p style="color: #BFDDE0">Text</p>
                 </div>
             </div>
         </div>
